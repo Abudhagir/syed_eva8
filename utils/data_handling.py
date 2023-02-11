@@ -10,7 +10,7 @@ import torchvision
 import torch
 import numpy as np
 import os
-from Torch_CV_Utils.utils import augmentation
+from syed_eva8.utils import augmentation
 
 
 cifar10_classes = ('plane', 'car', 'bird', 'cat','deer', 'dog', 'frog', 'horse', 'ship', 'truck')
