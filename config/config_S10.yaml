@@ -1,0 +1,16 @@
+standard_lr : 0.01
+momentum_val : 0.9
+oneCycle_pct_start : 0.2
+L2_penalty : 0.00001
+horizontalFlipProb : 0.2
+maxHoles : 1 
+minHoles : 1
+maxHeight : 32 
+maxWidth : 32
+minHeight : 32
+minWidth : 32
+coarseDropoutProb : 0.5
+grayscaleProb : 0.15
+padHeightWidth : 70
+randomCropSize : 64
+randomCropProb : 1
