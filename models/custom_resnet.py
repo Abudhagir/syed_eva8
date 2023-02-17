@@ -1,5 +1,5 @@
 import torch.nn as nn
-
+import torch.nn.functional as F
 
 class Custom_ResNet(nn.Module):
     def __init__(self,  drop=0.0):
