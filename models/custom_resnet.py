@@ -1,3 +1,6 @@
+import torch.nn as nn
+
+
 class Custom_ResNet(nn.Module):
     def __init__(self,  drop=0.0):
         super(Custom_ResNet, self).__init__()
