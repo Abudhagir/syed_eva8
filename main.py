@@ -3,7 +3,7 @@
 import torch
 import torchvision
 from syed_eva8.utils import data_handling, train, test, gradcam, helpers, augmentation
-from syed_eva8.models import resnet18
+from syed_eva8.models import resnet18, custom_resnet
 from torch.optim.lr_scheduler import StepLR, ExponentialLR, OneCycleLR, LambdaLR, CosineAnnealingLR, ReduceLROnPlateau
 import torch.nn.functional as F
 import torch.optim as optim
@@ -19,9 +19,9 @@ def create_dataloaders(mean, std, cuda, config, augment_func = "albumentation_au
     trainset, testset = data_handling.return_datasets(train_transforms, test_transforms)
 
     ## Define data loaders
-    trainloader, testloader = data_handling.return_dataloaders(trainset, testset, cuda, gpu_batch_size, cpu_batch_size)
+    train_loader, test_loader = data_handling.return_dataloaders(trainset, testset, cuda, gpu_batch_size, cpu_batch_size)
     
-    return trainloader, testloader
+    return train_loader, test_loader
 
 
 def trigger_training(model, device, trainloader, testloader, config, optimizer_name = "Adam", scheduler_name = "OneCycle", criterion_name = "CrossEntropyLoss", lambda_l1 = 0, epochs = 100):
