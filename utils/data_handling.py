@@ -38,11 +38,11 @@ def return_dataloaders(trainset, testset, cuda, gpu_batch_size = 512, cpu_batch_
     
     dataloader_args = dict(shuffle = True, batch_size = gpu_batch_size, num_workers = 4, pin_memory = True) if cuda else dict(shuffle = True, batch_size = cpu_batch_size)
 
-    trainloader = torch.utils.data.DataLoader(trainset, **dataloader_args)
+    train_loader = torch.utils.data.DataLoader(trainset, **dataloader_args)
 
-    testloader = torch.utils.data.DataLoader(testset, **dataloader_args)
+    test_loader = torch.utils.data.DataLoader(testset, **dataloader_args)
     
-    return trainloader, testloader
+    return train_loader, test_loader
 
 def prep_tinyimagenet(valid_dir):
     
@@ -88,10 +88,10 @@ def imshow(img):
     
     
 ## Function to show sample data
-def show_sample_data(trainloader, num_images = 16):
+def show_sample_data(train_loader, num_images = 16):
     
     # get some random training images
-    dataiter = iter(trainloader)
+    dataiter = iter(train_loader)
     images, labels = dataiter.next()
 
     # show images
