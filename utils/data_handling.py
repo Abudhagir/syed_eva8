@@ -34,7 +34,7 @@ def return_datasets(train_transforms, test_transforms):
     
     return trainset, testset
 
-def return_dataloaders(trainset, testset, cuda, gpu_batch_size = 128, cpu_batch_size = 64):
+def return_dataloaders(trainset, testset, cuda, gpu_batch_size = 512, cpu_batch_size = 64):
     
     dataloader_args = dict(shuffle = True, batch_size = gpu_batch_size, num_workers = 4, pin_memory = True) if cuda else dict(shuffle = True, batch_size = cpu_batch_size)
 
