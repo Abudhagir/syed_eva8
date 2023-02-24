@@ -1,4 +1,3 @@
-
 import torch
 import torch.nn as nn
 from tqdm import tqdm
@@ -11,7 +10,7 @@ def get_lr(optimizer):
     for param_group in optimizer.param_groups:
         return param_group['lr']
 
-def lr_range_test(model, train_loader, test_loader, device, criterion, start_lr = 1e-5, end_lr=50, mult_factor = 1.3):
+def lr_range_test(model, train_loader, test_loader, device, criterion, start_lr = 1e-5, end_lr=10, mult_factor = 1.3):
     
     optimizer = torch.optim.Adam(model.parameters(), lr=start_lr)
     lambda1 = lambda epoch: mult_factor ** epoch
@@ -69,4 +68,3 @@ def plot_lrs(lrs, test_losses):
     ax2.plot(lrs, test_losses)
     ax2.set_xscale('log')
     ax2.set_title("Learning rate vs Loss")
-    
