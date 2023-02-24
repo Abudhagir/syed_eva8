@@ -11,14 +11,14 @@ def get_lr(optimizer):
     for param_group in optimizer.param_groups:
         return param_group['lr']
 
-def lr_range_test(model, trainloader, testloader, device, criterion, start_lr = 1e-5, end_lr=50, mult_factor = 1.3):
+def lr_range_test(model, train_loader, test_loader, device, criterion, start_lr = 1e-5, end_lr=50, mult_factor = 1.3):
     
     optimizer = torch.optim.Adam(model.parameters(), lr=start_lr)
     lambda1 = lambda epoch: mult_factor ** epoch
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lambda1)
 
     model.train()
-    pbar = tqdm(trainloader)
+    pbar = tqdm(train_loader)
     train_losses, test_losses, lrs = [],[], []
 
     for batch_idx, (data, target) in enumerate(pbar):
@@ -46,12 +46,12 @@ def lr_range_test(model, trainloader, testloader, device, criterion, start_lr = 
         model.eval()
         test_loss = 0
         with torch.no_grad():
-            for data, target in testloader:
+            for data, target in test_loader:
                 data, target = data.to(device), target.to(device)
                 output = model(data)
                 test_loss += criterion(output, target).item()  # sum up batch loss
 
-        test_loss /= len(testloader.dataset)
+        test_loss /= len(test_loader.dataset)
         test_losses.append(test_loss)
 
         current_lr = get_lr(optimizer)
